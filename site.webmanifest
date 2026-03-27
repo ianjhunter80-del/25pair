@@ -1,21 +1,25 @@
 {
-  "name": "Copper Color Code",
-  "short_name": "25pr",
+  "name": "Copper Pair Finder",
+  "short_name": "Pair Finder",
+  "description": "OSP 25-pair color code translator. Supports up to 1800-pair cables.",
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1E2A3A",
+  "theme_color": "#1E2A3A",
   "icons": [
     {
-      "src": "/web-app-manifest-192x192.png",
+      "src": "web-app-manifest-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     },
     {
-      "src": "/web-app-manifest-512x512.png",
+      "src": "web-app-manifest-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ],
-  "theme_color": "#7cc0da",
-  "background_color": "#a5e1f1",
-  "display": "standalone"
+  "categories": ["utilities", "productivity"]
 }

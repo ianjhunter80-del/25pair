@@ -6,323 +6,407 @@
   <meta name="theme-color" content="#1E2A3A">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="description" content="25-Pair copper cable color code translator. Supports up to 1800-pair cables.">
-  <title>25-Pair Color Code</title>
+  <meta name="description" content="Copper Pair Finder — 25-pair color code translator for OSP cables up to 1800 pairs.">
+  <title>Copper Pair Finder</title>
+
+  <!-- Favicon: relative paths for GitHub Pages subdirectory hosting -->
   <link rel="manifest" href="site.webmanifest">
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
   <style>
     :root {
       --red:      #C41230;
+      --red-lt:   #F5E6EA;
       --navy:     #1E2A3A;
       --navy-lt:  #2C3E52;
       --blue:     #2C7BB6;
-      --bg:       #F2F1EE;
+      --blue-lt:  #E8F2FA;
+      --bg:       #F0EEE9;
       --surface:  #FFFFFF;
-      --surface2: #EDECEA;
-      --border:   #CECDCA;
-      --border-dk:#A8A7A4;
-      --text:     #1A1A1A;
-      --muted:    #666662;
-      --radius:   4px;
-      --radius-sm:3px;
+      --surface2: #F6F4F0;
+      --border:   #E0DDD8;
+      --border-dk:#C0BDB8;
+      --text:     #18181A;
+      --muted:    #72706C;
+      --radius:   10px;
+      --radius-sm:6px;
+      --radius-xs:4px;
+      --shadow:   0 1px 4px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+      --shadow-md:0 4px 16px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.04);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html { height: 100%; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
       font-size: 14px;
+      line-height: 1.5;
     }
 
-    /* Header */
+    /* ── Header ── */
     header {
       background: var(--navy);
       padding: 0 16px;
       padding-top: env(safe-area-inset-top, 0px);
-      border-bottom: 3px solid var(--red);
     }
     .header-inner {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 12px 0 10px;
+      gap: 12px;
+      padding: 14px 0 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    .header-title h1 {
-      font-size: 15px; font-weight: 700;
-      color: #fff;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-    }
-    .header-title p {
-      font-size: 11px;
-      color: rgba(255,255,255,0.5);
-      margin-top: 2px;
-    }
-    .header-badge {
+    .header-icon {
+      width: 40px; height: 40px;
       background: var(--red);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .header-icon svg { width: 22px; height: 22px; }
+    .header-text h1 {
+      font-size: 17px; font-weight: 700;
       color: #fff;
+      letter-spacing: -0.2px;
+    }
+    .header-text p {
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 1px;
+    }
+    .header-pill {
+      margin-left: auto;
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.6);
       font-size: 10px; font-weight: 700;
       letter-spacing: 0.8px;
       text-transform: uppercase;
-      padding: 4px 9px;
-      border-radius: var(--radius-sm);
+      padding: 4px 8px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.12);
+      white-space: nowrap;
     }
 
-    /* Tabs */
+    /* ── Tabs ── */
     .tabs {
       display: flex;
-      background: var(--navy-lt);
-      border-bottom: 1px solid rgba(0,0,0,0.25);
+      background: var(--navy);
+      padding: 0 4px 0;
+      gap: 2px;
     }
     .tab {
-      flex: 1; padding: 11px 4px;
+      flex: 1; padding: 10px 4px 12px;
       background: none; border: none;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.4);
       font-size: 11px; font-weight: 700;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.3px;
       text-transform: uppercase;
       cursor: pointer;
       border-bottom: 3px solid transparent;
       white-space: nowrap;
-      transition: all .15s;
+      transition: color .15s, border-color .15s;
     }
     .tab.active { color: #fff; border-bottom-color: var(--red); }
 
-    /* Panels */
-    .panels { padding: 14px 12px 8px; }
+    /* ── Main content ── */
+    .panels { padding: 16px 14px 8px; max-width: 520px; margin: 0 auto; }
     .panel { display: none; }
     .panel.active { display: block; }
 
-    /* Section headers — CTI red caps style */
-    .section-head {
-      font-size: 11px; font-weight: 700;
-      color: var(--red);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      padding-bottom: 6px;
-      border-bottom: 1.5px solid var(--red);
-      margin-bottom: 12px;
-    }
-    .subsection-label {
-      font-size: 10px; font-weight: 700;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      padding-bottom: 5px;
-      border-bottom: 1px solid var(--border);
-      margin: 12px 0 8px;
-    }
-
-    /* Cards */
+    /* ── Cards ── */
     .card {
       background: var(--surface);
-      border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 14px;
-      margin-bottom: 10px;
+      box-shadow: var(--shadow);
+      padding: 16px;
+      margin-bottom: 12px;
     }
 
-    /* Form elements */
-    label {
-      display: block;
+    /* ── Section label ── */
+    .section-label {
+      font-size: 10px; font-weight: 700;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1.5px;
+      background: var(--red-lt);
+      border-radius: 2px;
+    }
+    .sub-label {
       font-size: 10px; font-weight: 700;
       color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.6px;
-      margin-bottom: 5px;
+      margin: 14px 0 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
     }
-    input[type=number], select {
+
+    /* ── Form controls ── */
+    .field-label {
+      display: block;
+      font-size: 11px; font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .input-wrap { position: relative; }
+    input[type=number] {
       width: 100%;
-      padding: 11px 12px;
+      padding: 14px 16px;
       background: var(--surface2);
-      border: 1px solid var(--border-dk);
+      border: 1.5px solid var(--border);
       border-radius: var(--radius-sm);
       color: var(--text);
-      font-size: 20px;
+      font-size: 22px; font-weight: 600;
       font-family: inherit;
       -webkit-appearance: none; appearance: none;
+      transition: border-color .15s, background .15s;
     }
-    select {
-      font-size: 14px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 10px center;
-      padding-right: 32px;
-    }
-    input[type=number]:focus, select:focus {
+    input[type=number]:focus {
       outline: none;
-      border-color: var(--red);
+      border-color: var(--navy);
       background: #fff;
     }
+    input[type=number]::placeholder { color: var(--border-dk); font-weight: 400; }
+
+    select {
+      width: 100%;
+      padding: 11px 34px 11px 12px;
+      background: var(--surface2);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-size: 14px; font-weight: 500;
+      font-family: inherit;
+      -webkit-appearance: none; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      transition: border-color .15s;
+    }
+    select:focus { outline: none; border-color: var(--navy); }
     .select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
-    /* Look-up button */
+    /* ── Lookup button ── */
     .lookup-btn {
       margin-top: 10px;
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       background: var(--navy);
       color: #fff;
       border: none;
       border-radius: var(--radius-sm);
-      font-size: 12px; font-weight: 700;
-      letter-spacing: 0.6px;
+      font-size: 13px; font-weight: 700;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
       cursor: pointer;
-      transition: background .15s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: background .15s, transform .1s;
     }
-    .lookup-btn:active { background: var(--red); }
+    .lookup-btn:active { background: var(--red); transform: scale(0.99); }
+    .lookup-btn-icon { font-size: 16px; }
 
-    /* Result level cards */
+    /* ── Result level cards ── */
     .result-stack { display: flex; flex-direction: column; gap: 8px; }
+
     .level-card {
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--border-dk);
       border-radius: var(--radius);
-      padding: 12px 14px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
-    .level-card.superbinder { border-left-color: var(--navy); }
-    .level-card.binder      { border-left-color: var(--red); }
-    .level-card.pair        { border-left-color: var(--blue); }
+    .level-card-bar {
+      height: 4px;
+    }
+    .level-card.superbinder .level-card-bar { background: var(--navy); }
+    .level-card.binder      .level-card-bar { background: var(--red); }
+    .level-card.pair        .level-card-bar { background: var(--blue); }
+    .level-card-body { padding: 12px 14px; }
 
     .level-tag {
       font-size: 10px; font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
     }
     .level-card.superbinder .level-tag { color: var(--navy); }
-    .level-card.binder .level-tag      { color: var(--red); }
-    .level-card.pair .level-tag        { color: var(--blue); }
+    .level-card.binder      .level-tag { color: var(--red); }
+    .level-card.pair        .level-tag { color: var(--blue); }
+
+    .level-subtitle {
+      font-size: 11px; color: var(--muted);
+      margin-bottom: 10px;
+    }
 
     .level-number {
-      font-size: 44px; font-weight: 700;
-      line-height: 1; margin-bottom: 8px;
+      font-size: 48px; font-weight: 800;
+      line-height: 1; margin-bottom: 10px;
+      letter-spacing: -1px;
       font-variant-numeric: tabular-nums;
     }
     .level-card.superbinder .level-number { color: var(--navy); }
-    .level-card.binder .level-number      { color: var(--red); }
-    .level-card.pair .level-number        { color: var(--blue); }
+    .level-card.binder      .level-number { color: var(--red); }
+    .level-card.pair        .level-number { color: var(--blue); }
 
-    .swatch-row { display: flex; align-items: center; gap: 10px; }
-    .swatch-item { display: flex; align-items: center; gap: 8px; }
-    .swatch {
-      width: 38px; height: 38px;
+    .swatch-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px;
+      background: var(--surface2);
       border-radius: var(--radius-sm);
-      border: 1px solid rgba(0,0,0,0.15);
+    }
+    .swatch-item { display: flex; align-items: center; gap: 8px; flex: 1; }
+    .swatch {
+      width: 36px; height: 36px;
+      border-radius: var(--radius-xs);
+      border: 1.5px solid rgba(0,0,0,0.12);
       flex-shrink: 0;
     }
+    .swatch.white { border-color: var(--border-dk); }
     .swatch-info .role {
       font-size: 9px; font-weight: 700;
       color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      text-transform: uppercase; letter-spacing: 0.5px;
     }
-    .swatch-info .color-name { font-size: 15px; font-weight: 600; margin-top: 2px; }
-    .slash { font-size: 16px; color: var(--border-dk); padding: 0 2px; }
+    .swatch-info .color-name { font-size: 14px; font-weight: 600; margin-top: 1px; }
+    .swatch-divider { width: 1px; height: 36px; background: var(--border); flex-shrink: 0; }
+
     .level-note {
       font-size: 11px; color: var(--muted);
-      margin-top: 8px; padding-top: 8px;
-      border-top: 1px solid var(--border);
+      margin-top: 8px;
+      display: flex; align-items: center; gap: 5px;
     }
+    .level-note::before { content: '↳'; color: var(--border-dk); }
 
-    /* Reference tab */
-    .sb-section { margin-bottom: 14px; }
+    /* ── Reference tab ── */
+    .ref-intro {
+      font-size: 12px; color: var(--muted);
+      margin-bottom: 14px;
+      padding: 10px 12px;
+      background: var(--blue-lt);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--blue);
+    }
+    .sb-section { margin-bottom: 16px; }
     .sb-header {
       display: flex; align-items: center; gap: 10px;
-      padding: 9px 12px;
+      padding: 10px 14px;
       background: var(--navy);
       border-radius: var(--radius-sm);
-      margin-bottom: 4px;
+      margin-bottom: 5px;
+      box-shadow: var(--shadow);
     }
     .sb-swatch {
       width: 18px; height: 18px;
-      border-radius: 2px;
-      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 3px;
+      border: 1.5px solid rgba(255,255,255,0.25);
       flex-shrink: 0;
     }
-    .sb-title { font-size: 11px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
-    .sb-range { font-size: 11px; color: rgba(255,255,255,0.45); margin-left: auto; }
+    .sb-title { font-size: 12px; font-weight: 700; color: #fff; letter-spacing: 0.3px; }
+    .sb-range { font-size: 11px; color: rgba(255,255,255,0.4); margin-left: auto; }
+
+    .no-sb-header {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 14px;
+      background: var(--surface2);
+      border: 1px dashed var(--border-dk);
+      border-radius: var(--radius-sm);
+      margin-bottom: 5px;
+      font-size: 11px; font-weight: 600; color: var(--muted);
+    }
 
     .binder-row {
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--red);
       border-radius: var(--radius-sm);
       margin-bottom: 3px;
       overflow: hidden;
+      box-shadow: var(--shadow);
     }
     .binder-head {
       display: flex; align-items: center; gap: 8px;
-      padding: 8px 10px;
+      padding: 9px 12px;
       cursor: pointer;
+      border-left: 3px solid var(--red);
     }
     .binder-head:active { background: var(--surface2); }
     .binder-num { font-size: 11px; font-weight: 700; color: var(--red); min-width: 26px; }
     .binder-dots { display: flex; gap: 3px; }
-    .binder-dot { width: 14px; height: 14px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.12); }
-    .binder-name { font-size: 12px; color: var(--text); font-weight: 500; }
+    .binder-dot { width: 14px; height: 14px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.1); }
+    .binder-name { font-size: 12px; font-weight: 500; color: var(--text); }
     .binder-range { font-size: 11px; color: var(--muted); margin-left: auto; margin-right: 4px; }
-    .expand-icon { font-size: 10px; color: var(--muted); transition: transform .2s; }
+    .expand-icon { font-size: 9px; color: var(--muted); transition: transform .2s; }
     .binder-head.open .expand-icon { transform: rotate(180deg); }
 
     .pairs-grid {
       display: none;
       grid-template-columns: repeat(5, 1fr);
       gap: 3px;
-      padding: 7px 10px 10px;
+      padding: 8px 10px 10px;
       border-top: 1px solid var(--border);
       background: var(--surface2);
     }
     .pairs-grid.open { display: grid; }
     .pair-chip {
       display: flex; flex-direction: column; align-items: center;
-      gap: 2px; padding: 5px 2px;
+      gap: 3px; padding: 6px 2px;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
+      border-radius: var(--radius-xs);
       cursor: pointer;
+      transition: border-color .1s, box-shadow .1s;
     }
-    .pair-chip:active { border-color: var(--red); }
-    .pair-chip .chip-num { font-size: 10px; font-weight: 700; color: var(--muted); }
-    .pair-chip .chip-dots { display: flex; gap: 2px; }
-    .pair-chip .chip-dot { width: 11px; height: 11px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.1); }
-    .pair-chip .chip-lbl { font-size: 9px; color: var(--muted); }
+    .pair-chip:active { border-color: var(--red); box-shadow: 0 0 0 2px var(--red-lt); }
+    .chip-num { font-size: 10px; font-weight: 700; color: var(--muted); }
+    .chip-dots { display: flex; gap: 2px; }
+    .chip-dot { width: 11px; height: 11px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.08); }
+    .chip-lbl { font-size: 9px; color: var(--muted); }
 
-    /* Error */
-    .error-msg { font-size: 13px; color: var(--red); font-weight: 600; padding: 4px 0; }
+    /* ── Error ── */
+    .error-card {
+      background: #FEF2F4;
+      border: 1px solid #F5C0C8;
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      color: var(--red);
+      font-size: 13px; font-weight: 600;
+    }
 
-    /* Footer */
+    /* ── Footer ── */
     footer {
-      margin-top: 20px;
-      padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px));
-      background: var(--navy);
-      border-top: 2px solid var(--red);
+      max-width: 520px; margin: 20px auto 0;
+      padding: 16px 14px calc(16px + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--border);
       text-align: center;
     }
-    footer p { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.7; }
-    footer strong { color: rgba(255,255,255,0.65); font-weight: 600; }
+    footer p { font-size: 11px; color: var(--muted); line-height: 1.8; }
+    footer strong { color: var(--text); font-weight: 600; }
 
-    /* Toast */
+    /* ── Toast ── */
     .toast {
       position: fixed;
-      bottom: 20px;
+      bottom: 24px;
       left: 50%; transform: translateX(-50%) translateY(80px);
       background: var(--navy);
       color: #fff;
-      padding: 9px 18px;
-      border-radius: 20px;
+      padding: 10px 20px;
+      border-radius: 24px;
       font-size: 12px; font-weight: 700;
       letter-spacing: 0.3px;
-      border-left: 3px solid var(--red);
-      transition: transform .25s ease;
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1);
       z-index: 100; white-space: nowrap;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+      box-shadow: var(--shadow-md);
     }
     .toast.show { transform: translateX(-50%) translateY(0); }
   </style>
@@ -331,11 +415,20 @@
 
 <header>
   <div class="header-inner">
-    <div class="header-title">
-      <h1>25-Pair Color Code</h1>
-      <p>Copper Cable Pair &amp; Binder Translator</p>
+    <div class="header-icon">
+      <!-- Utility/cable icon -->
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 6h18M3 12h18M3 18h18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="7" cy="6" r="1.5" fill="white"/>
+        <circle cx="12" cy="12" r="1.5" fill="white"/>
+        <circle cx="17" cy="18" r="1.5" fill="white"/>
+      </svg>
     </div>
-    <div class="header-badge">OSP</div>
+    <div class="header-text">
+      <h1>Copper Pair Finder</h1>
+      <p>OSP 25-Pair Color Code Translator</p>
+    </div>
+    <div class="header-pill">1800-pr</div>
   </div>
 </header>
 
@@ -347,35 +440,37 @@
 
 <div class="panels">
 
-  <!-- ── Pair # → Colors ── -->
+  <!-- ── Pair Number → Colors ── -->
   <div id="panel-num" class="panel active">
     <div class="card">
-      <div class="section-head">Pair Number Lookup</div>
-      <label>Pair number (1 – 1800)</label>
+      <div class="section-label">Pair Number Lookup</div>
+      <label class="field-label">Enter pair number (1–1800)</label>
       <input type="number" id="pairInput" min="1" max="1800"
         inputmode="numeric" placeholder="e.g. 847"
         onkeydown="if(event.key==='Enter')doLookupPair()">
-      <button class="lookup-btn" onclick="doLookupPair()">Look Up Pair ↵</button>
+      <button class="lookup-btn" onclick="doLookupPair()">
+        <span class="lookup-btn-icon">⌕</span> Find Pair
+      </button>
     </div>
     <div id="pairResult"></div>
   </div>
 
-  <!-- ── Colors → Pair # ── -->
+  <!-- ── Colors → Pair Number ── -->
   <div id="panel-col" class="panel">
     <div class="card">
-      <div class="section-head">Color Code Lookup</div>
+      <div class="section-label">Color Code Lookup</div>
 
-      <div class="subsection-label">Super Binder — solid color ribbon (600 pairs each)</div>
-      <label>Ribbon color</label>
+      <div class="sub-label">Super Binder — solid ribbon (600 pairs each)</div>
+      <label class="field-label">Ribbon color</label>
       <select id="sbSel" onchange="lookupColor()">
         <option value="0">White — pairs 1–600</option>
         <option value="1">Red — pairs 601–1200</option>
         <option value="2">Black — pairs 1201–1800</option>
       </select>
 
-      <div class="subsection-label">Binder Group — two-color ribbon (25 pairs, groups 1–24)</div>
+      <div class="sub-label">Binder Group — two-color ribbon (groups 1–24)</div>
       <div class="select-grid">
-        <div><label>Tip color</label>
+        <div><label class="field-label">Tip color</label>
           <select id="bTipSel" onchange="lookupColor()">
             <option value="0">White</option>
             <option value="1">Red</option>
@@ -384,7 +479,7 @@
             <option value="4">Violet</option>
           </select>
         </div>
-        <div><label>Ring color</label>
+        <div><label class="field-label">Ring color</label>
           <select id="bRingSel" onchange="lookupColor()">
             <option value="0">Blue</option>
             <option value="1">Orange</option>
@@ -394,9 +489,9 @@
         </div>
       </div>
 
-      <div class="subsection-label">Pair — within binder (1–25)</div>
+      <div class="sub-label">Pair — within binder (1–25)</div>
       <div class="select-grid">
-        <div><label>Tip color</label>
+        <div><label class="field-label">Tip color</label>
           <select id="pTipSel" onchange="lookupColor()">
             <option value="0">White</option>
             <option value="1">Red</option>
@@ -405,7 +500,7 @@
             <option value="4">Violet</option>
           </select>
         </div>
-        <div><label>Ring color</label>
+        <div><label class="field-label">Ring color</label>
           <select id="pRingSel" onchange="lookupColor()">
             <option value="0">Blue</option>
             <option value="1">Orange</option>
@@ -421,6 +516,9 @@
 
   <!-- ── Reference ── -->
   <div id="panel-ref" class="panel">
+    <div class="ref-intro">
+      Tap any binder row to expand its 25 pairs. Tap a pair chip to jump to the lookup.
+    </div>
     <div id="refContent"></div>
   </div>
 
@@ -428,9 +526,9 @@
 
 <footer>
   <p>
-    <strong>25-Pair Color Code Translator</strong><br>
+    <strong>Copper Pair Finder</strong><br>
     &copy; <span id="copy-year"></span> Ian Hunter, V2X, Inc. All rights reserved.<br>
-    For field reference use. Verify all pair identification before work.
+    For field reference only. Verify all pair identification before work.
   </p>
 </footer>
 
@@ -438,22 +536,20 @@
 
 <script>
 /*
-  STANDARD 25-PAIR COLOR CODE — OSP (per Superior Essex / Telcordia spec)
-  -------------------------------------------------------------------------
-  PAIR COLORS (1–25):
+  STANDARD 25-PAIR COLOR CODE — OSP
+  ───────────────────────────────────────────────────────────────
+  PAIRS (1–25): Tip × Ring from two groups of 5
     Tip:  White · Red · Black · Yellow · Violet
     Ring: Blue · Orange · Green · Brown · Slate
 
-  BINDER GROUPS (25 pairs each):
-    Same color sequence as pairs — White/Blue (1) through Violet/Brown (24)
-    Violet/Slate (#25) is NEVER used as a binder color.
+  BINDER GROUPS (25 pairs each, 1–24 per super binder):
+    Same color sequence as pairs 1–24 (Violet/Slate never used as binder)
 
-  SUPER BINDERS (600 pairs = 24 binder groups):
-    Single SOLID color ribbon:
-      White  → pairs    1–600   (binders  1–24)
+  SUPER BINDERS (600 pairs = 24 binder groups each):
+    Single solid color ribbon:
+      White  → pairs    1–600   (binders  1–24)  — implied, not labeled
       Red    → pairs  601–1200  (binders 25–48)
       Black  → pairs 1201–1800  (binders 49–72)
-    NOTE: Cables ≤600 pairs have no super binder — White is assumed.
 */
 
 const TIPS = [
@@ -484,41 +580,46 @@ function pairColors(n) {
 function fullLookup(overall) {
   const idx     = overall - 1;
   const pairInB = (idx % 25) + 1;
-  const bIdx    = Math.floor(idx / 25);      // 0-based binder index
-  const sbIdx   = Math.floor(bIdx / 24);     // 0=White,1=Red,2=Black
-  const bInSb   = (bIdx % 24) + 1;           // 1-24 within super binder
+  const bIdx    = Math.floor(idx / 25);
+  const sbIdx   = Math.floor(bIdx / 24);
+  const bInSb   = (bIdx % 24) + 1;
   const bStart  = bIdx * 25 + 1;
   const sbStart = sbIdx * 600 + 1;
   return {
     overall,
     pair:        {...pairColors(pairInB), num: pairInB},
     binder:      {...pairColors(bInSb),  num: bIdx+1, withinSb: bInSb, start: bStart, end: bStart+24},
-    superBinder: {color: SB_COLORS[sbIdx], num: sbIdx+1, start: sbStart, end: Math.min(sbStart+599,1800)},
+    superBinder: {color: SB_COLORS[sbIdx], num: sbIdx+1, start: sbStart, end: Math.min(sbStart+599, 1800)},
     hasSuperBinder: overall > 600,
   };
 }
 
-/* ── Rendering helpers ── */
-function swatchEl(color) {
-  return `<div class="swatch" style="background:${color.hex}"></div>`;
-}
-function pairSwatchRow(tip, ring) {
+function swatchRowHTML(tip, ring) {
+  const isWhiteTip = tip.name === 'White';
   return `<div class="swatch-row">
     <div class="swatch-item">
-      ${swatchEl(tip)}
-      <div class="swatch-info"><div class="role">Tip</div><div class="color-name">${tip.name}</div></div>
+      <div class="swatch${isWhiteTip?' white':''}" style="background:${tip.hex}"></div>
+      <div class="swatch-info">
+        <div class="role">Tip</div>
+        <div class="color-name">${tip.name}</div>
+      </div>
     </div>
-    <div class="slash">/</div>
+    <div class="swatch-divider"></div>
     <div class="swatch-item">
-      ${swatchEl(ring)}
-      <div class="swatch-info"><div class="role">Ring</div><div class="color-name">${ring.name}</div></div>
+      <div class="swatch" style="background:${ring.hex}"></div>
+      <div class="swatch-info">
+        <div class="role">Ring</div>
+        <div class="color-name">${ring.name}</div>
+      </div>
     </div>
   </div>`;
 }
-function solidSwatchRow(color) {
+
+function solidSwatchRowHTML(color) {
+  const isWhite = color.name === 'White';
   return `<div class="swatch-row">
     <div class="swatch-item">
-      ${swatchEl(color)}
+      <div class="swatch${isWhite?' white':''}" style="background:${color.hex}"></div>
       <div class="swatch-info">
         <div class="role">Solid ribbon</div>
         <div class="color-name">${color.name}</div>
@@ -526,12 +627,17 @@ function solidSwatchRow(color) {
     </div>
   </div>`;
 }
-function levelCard(cls, tag, numDisplay, swatchHTML, note) {
+
+function levelCardHTML(cls, tag, subtitle, numDisplay, swatchHTML, note) {
   return `<div class="level-card ${cls}">
-    <div class="level-tag">${tag}</div>
-    ${numDisplay !== '' ? `<div class="level-number">${numDisplay}</div>` : ''}
-    ${swatchHTML}
-    ${note ? `<div class="level-note">${note}</div>` : ''}
+    <div class="level-card-bar"></div>
+    <div class="level-card-body">
+      <div class="level-tag">${tag}</div>
+      ${subtitle ? `<div class="level-subtitle">${subtitle}</div>` : ''}
+      ${numDisplay !== '' ? `<div class="level-number">${numDisplay}</div>` : ''}
+      ${swatchHTML}
+      ${note ? `<div class="level-note">${note}</div>` : ''}
+    </div>
   </div>`;
 }
 
@@ -541,35 +647,35 @@ function doLookupPair() {
   const el = document.getElementById('pairResult');
   if (!v) { el.innerHTML = ''; return; }
   if (v < 1 || v > 1800) {
-    el.innerHTML = `<div class="card"><p class="error-msg">Enter a number between 1 and 1800.</p></div>`;
+    el.innerHTML = `<div class="error-card">Enter a number between 1 and 1800.</div>`;
     return;
   }
   const r = fullLookup(v);
   let cards = '';
 
-  // Super binder — only shown for pairs > 600
   if (r.hasSuperBinder) {
-    cards += levelCard('superbinder',
-      `Super Binder ${r.superBinder.num} of 3 &nbsp;·&nbsp; Solid ribbon`,
+    cards += levelCardHTML('superbinder',
+      'Super Binder',
+      `${r.superBinder.num} of 3 &nbsp;·&nbsp; Solid color ribbon`,
       '',
-      solidSwatchRow(r.superBinder.color),
+      solidSwatchRowHTML(r.superBinder.color),
       `Covers pairs ${r.superBinder.start}–${r.superBinder.end}`);
   }
 
-  // Binder group
-  cards += levelCard('binder',
+  cards += levelCardHTML('binder',
+    'Binder Group',
     r.hasSuperBinder
-      ? `Binder ${r.binder.num} of 72 &nbsp;·&nbsp; Group ${r.binder.withinSb} of 24 within super binder`
-      : `Binder ${r.binder.num} of 24`,
+      ? `${r.binder.num} of 72 &nbsp;·&nbsp; Group ${r.binder.withinSb} of 24 in super binder`
+      : `${r.binder.num} of 24`,
     '',
-    pairSwatchRow(r.binder.tip, r.binder.ring),
+    swatchRowHTML(r.binder.tip, r.binder.ring),
     `Covers pairs ${r.binder.start}–${r.binder.end}`);
 
-  // Pair
-  cards += levelCard('pair',
-    `Pair ${r.pair.num} of 25 within binder &nbsp;·&nbsp; Overall pair`,
+  cards += levelCardHTML('pair',
+    'Pair',
+    `${r.pair.num} of 25 within binder`,
     v,
-    pairSwatchRow(r.pair.tip, r.pair.ring),
+    swatchRowHTML(r.pair.tip, r.pair.ring),
     '');
 
   el.innerHTML = `<div class="result-stack">${cards}</div>`;
@@ -584,42 +690,44 @@ function lookupColor() {
   const pRi  = parseInt(document.getElementById('pRingSel').value);
   const el   = document.getElementById('colorResult');
 
-  // Binder ring only goes to Brown (index 3) — Slate is never a binder ring
-  const bNum = bTi * 5 + bRi + 1;  // 1-20 valid, max 24
-  const pNum = pTi * 5 + pRi + 1;  // 1-25
+  const bNum   = bTi * 5 + bRi + 1;
+  const pNum   = pTi * 5 + pRi + 1;
 
   if (bNum > 24) {
-    el.innerHTML = `<div class="card"><p class="error-msg">Invalid binder combination — max is Violet/Brown (group 24).</p></div>`;
+    el.innerHTML = `<div class="error-card">Invalid binder — max is Violet/Brown (group 24).</div>`;
     return;
   }
 
   const bOverall = sbI * 24 + bNum;
-  const overall  = sbI * 600 + (bNum-1) * 25 + pNum;
-  const bStart   = (bOverall-1) * 25 + 1;
+  const overall  = sbI * 600 + (bNum - 1) * 25 + pNum;
+  const bStart   = (bOverall - 1) * 25 + 1;
   const sbStart  = sbI * 600 + 1;
+  const showSb   = overall > 600;
   const bC       = pairColors(bNum);
   const pC       = pairColors(pNum);
-  const showSb   = overall > 600;
 
   let cards = '';
   if (showSb) {
-    cards += levelCard('superbinder',
-      `Super Binder ${sbI+1} of 3 &nbsp;·&nbsp; Solid ribbon`,
+    cards += levelCardHTML('superbinder',
+      'Super Binder',
+      `${sbI+1} of 3 &nbsp;·&nbsp; Solid color ribbon`,
       '',
-      solidSwatchRow(SB_COLORS[sbI]),
+      solidSwatchRowHTML(SB_COLORS[sbI]),
       `Covers pairs ${sbStart}–${Math.min(sbStart+599,1800)}`);
   }
-  cards += levelCard('binder',
+  cards += levelCardHTML('binder',
+    'Binder Group',
     showSb
-      ? `Binder ${bOverall} of 72 &nbsp;·&nbsp; Group ${bNum} of 24 within super binder`
-      : `Binder ${bOverall} of 24`,
+      ? `${bOverall} of 72 &nbsp;·&nbsp; Group ${bNum} of 24 in super binder`
+      : `${bOverall} of 24`,
     '',
-    pairSwatchRow(bC.tip, bC.ring),
+    swatchRowHTML(bC.tip, bC.ring),
     `Covers pairs ${bStart}–${bStart+24}`);
-  cards += levelCard('pair',
-    `Pair ${pNum} of 25 within binder &nbsp;·&nbsp; Overall pair`,
+  cards += levelCardHTML('pair',
+    'Pair',
+    `${pNum} of 25 within binder`,
     overall,
-    pairSwatchRow(pC.tip, pC.ring),
+    swatchRowHTML(pC.tip, pC.ring),
     '');
 
   el.innerHTML = `<div class="result-stack">${cards}</div>`;
@@ -633,28 +741,28 @@ function buildRef() {
     const sbc     = SB_COLORS[sb];
     const sbStart = sb * 600 + 1;
     const sbEnd   = Math.min(sbStart + 599, 1800);
-    // Only show super binder header for sb > 0 (White is implicit for 1-600)
+
+    h += `<div class="sb-section">`;
     if (sb === 0) {
-      h += `<div class="sb-section">
-        <div class="section-head" style="margin-bottom:8px">Pairs 1–600 &nbsp;·&nbsp; No super binder (White assumed)</div>`;
+      h += `<div class="no-sb-header">⬜ Pairs 1–600 &nbsp;·&nbsp; No super binder (White ribbon assumed)</div>`;
     } else {
-      h += `<div class="sb-section">
-        <div class="sb-header">
-          <div class="sb-swatch" style="background:${sbc.hex};${sb===0?'border:1px solid #aaa':''}"></div>
-          <span class="sb-title">Super Binder ${sb+1}: ${sbc.name} ribbon</span>
-          <span class="sb-range">pairs ${sbStart}–${sbEnd}</span>
-        </div>`;
+      h += `<div class="sb-header">
+        <div class="sb-swatch" style="background:${sbc.hex}"></div>
+        <span class="sb-title">Super Binder ${sb+1} — ${sbc.name} ribbon</span>
+        <span class="sb-range">pairs ${sbStart}–${sbEnd}</span>
+      </div>`;
     }
+
     for (let b = 1; b <= 24; b++) {
       const bc       = pairColors(b);
       const bOverall = sb * 24 + b;
-      const bStart   = (bOverall-1) * 25 + 1;
+      const bStart   = (bOverall - 1) * 25 + 1;
       const bEnd     = bStart + 24;
       h += `<div class="binder-row">
         <div class="binder-head" onclick="toggleBinder(this)">
           <span class="binder-num">${bOverall}</span>
           <div class="binder-dots">
-            <div class="binder-dot" style="background:${bc.tip.hex}"></div>
+            <div class="binder-dot" style="background:${bc.tip.hex};${bc.tip.name==='White'?'border:1px solid #ccc':''}"></div>
             <div class="binder-dot" style="background:${bc.ring.hex}"></div>
           </div>
           <span class="binder-name">${bc.tip.name}/${bc.ring.name}</span>
@@ -668,7 +776,7 @@ function buildRef() {
         h += `<div class="pair-chip" onclick="goToPair(${overall})">
           <span class="chip-num">${overall}</span>
           <div class="chip-dots">
-            <div class="chip-dot" style="background:${pc.tip.hex}"></div>
+            <div class="chip-dot" style="background:${pc.tip.hex};${pc.tip.name==='White'?'border:1px solid #ccc':''}"></div>
             <div class="chip-dot" style="background:${pc.ring.hex}"></div>
           </div>
           <span class="chip-lbl">${pc.tip.name[0]}/${pc.ring.name[0]}</span>
