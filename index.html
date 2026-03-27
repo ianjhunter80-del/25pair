@@ -50,15 +50,13 @@
       border-bottom: 1px solid var(--border);
     }
     .tab {
-      flex: 1;
-      padding: 12px 6px;
+      flex: 1; padding: 12px 6px;
       background: none; border: none;
       color: var(--muted);
       font-size: 13px; font-weight: 500;
       cursor: pointer;
       border-bottom: 2px solid transparent;
-      white-space: nowrap;
-      transition: all .15s;
+      white-space: nowrap; transition: all .15s;
     }
     .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
     .panels { padding: 16px; }
@@ -68,34 +66,35 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 16px;
-      margin-bottom: 12px;
+      padding: 16px; margin-bottom: 12px;
     }
     label {
-      display: block;
-      font-size: 11px; color: var(--muted);
-      margin-bottom: 8px;
-      text-transform: uppercase; letter-spacing: 0.6px;
+      display: block; font-size: 11px; color: var(--muted);
+      margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.6px;
     }
     input[type=number], select {
-      width: 100%;
-      padding: 14px 16px;
+      width: 100%; padding: 14px 16px;
       background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      color: var(--text);
-      font-size: 20px;
+      color: var(--text); font-size: 20px;
       -webkit-appearance: none; appearance: none;
     }
     select {
       font-size: 15px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 12px center;
-      padding-right: 36px;
+      background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px;
     }
     input[type=number]:focus, select:focus { outline: none; border-color: var(--accent); }
+    .select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .section-divider {
+      font-size: 11px; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.6px;
+      margin: 14px 0 8px; padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
 
+    /* Result cards */
     .result-stack { display: flex; flex-direction: column; gap: 8px; }
     .level-card {
       border-radius: var(--radius-sm);
@@ -107,72 +106,59 @@
     .level-card.pair        { border-left: 3px solid var(--accent);  background: rgba(55,138,221,0.08); }
     .level-tag {
       font-size: 10px; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.8px;
-      margin-bottom: 8px;
+      text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px;
     }
     .level-card.superbinder .level-tag { color: var(--accent3); }
     .level-card.binder .level-tag      { color: var(--accent2); }
     .level-card.pair .level-tag        { color: var(--accent); }
-    .level-number {
-      font-size: 40px; font-weight: 700; line-height: 1; margin-bottom: 8px;
-    }
+    .level-number { font-size: 40px; font-weight: 700; line-height: 1; margin-bottom: 8px; }
     .level-card.superbinder .level-number { color: var(--accent3); }
     .level-card.binder .level-number      { color: var(--accent2); }
     .level-card.pair .level-number        { color: var(--accent); }
     .swatch-row { display: flex; align-items: center; gap: 10px; }
     .swatch-item { display: flex; align-items: center; gap: 8px; }
-    .swatch {
-      width: 40px; height: 40px;
-      border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.15);
-      flex-shrink: 0;
-    }
+    .swatch { width: 40px; height: 40px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15); flex-shrink: 0; }
     .swatch-info .role { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
     .swatch-info .color-name { font-size: 15px; font-weight: 600; margin-top: 1px; }
     .slash { font-size: 18px; color: var(--muted); padding: 0 2px; }
     .pair-range { font-size: 12px; color: var(--muted); margin-top: 8px; }
+    .single-swatch-row { display: flex; align-items: center; gap: 10px; }
+    .sb-label-text { font-size: 15px; font-weight: 600; }
 
-    .select-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-    .section-divider {
-      font-size: 11px; color: var(--muted);
-      text-transform: uppercase; letter-spacing: 0.6px;
-      margin: 14px 0 8px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--border);
-    }
-
+    /* Reference */
     .sb-section { margin-bottom: 20px; }
     .sb-header {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 12px; font-weight: 600;
-      color: var(--accent3);
-      text-transform: uppercase; letter-spacing: 0.6px;
-      margin-bottom: 8px;
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 6px;
+      border-left: 3px solid var(--accent3);
     }
-    .sb-dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2); }
+    .sb-swatch { width: 22px; height: 22px; border-radius: 4px; border: 1px solid rgba(255,255,255,.2); flex-shrink: 0; }
+    .sb-title { font-size: 13px; font-weight: 600; color: var(--accent3); }
+    .sb-range { font-size: 11px; color: var(--muted); margin-left: auto; }
     .binder-row {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      margin-bottom: 4px;
-      overflow: hidden;
+      margin-bottom: 4px; overflow: hidden;
     }
     .binder-head {
       display: flex; align-items: center; gap: 10px;
-      padding: 10px 12px;
-      cursor: pointer;
+      padding: 9px 12px; cursor: pointer;
     }
     .binder-head:active { background: var(--surface2); }
-    .binder-num { font-size: 12px; font-weight: 600; color: var(--accent2); min-width: 22px; }
-    .binder-dots { display: flex; gap: 4px; }
-    .binder-dot { width: 16px; height: 16px; border-radius: 3px; border: 1px solid rgba(255,255,255,.12); }
+    .binder-num { font-size: 12px; font-weight: 600; color: var(--accent2); min-width: 24px; }
+    .binder-dots { display: flex; gap: 3px; }
+    .binder-dot { width: 15px; height: 15px; border-radius: 3px; border: 1px solid rgba(255,255,255,.12); }
     .binder-name { font-size: 13px; color: var(--text); }
     .binder-range { font-size: 11px; color: var(--muted); margin-left: auto; }
     .pairs-grid {
       display: none;
       grid-template-columns: repeat(5, 1fr);
-      gap: 4px;
-      padding: 8px 12px 12px;
+      gap: 4px; padding: 8px 12px 12px;
       border-top: 1px solid var(--border);
       background: var(--surface2);
     }
@@ -182,17 +168,13 @@
       gap: 3px; padding: 6px 4px;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 11px;
+      border-radius: 6px; cursor: pointer; font-size: 11px;
     }
     .pair-chip:active { border-color: var(--accent); }
     .pair-chip .chip-num { font-weight: 600; color: var(--muted); }
     .pair-chip .chip-dots { display: flex; gap: 2px; }
     .pair-chip .chip-dot { width: 12px; height: 12px; border-radius: 2px; border: 1px solid rgba(255,255,255,.12); }
-
     .error-msg { font-size: 14px; color: #E24B4A; padding: 8px 0; }
-
     .toast {
       position: fixed;
       bottom: calc(20px + env(safe-area-inset-bottom, 0px));
@@ -221,6 +203,7 @@
 
 <div class="panels">
 
+  <!-- Pair # → Colors -->
   <div id="panel-num" class="panel active">
     <div class="card">
       <label>Pair number (1 – 1800)</label>
@@ -229,33 +212,28 @@
     <div id="pairResult"></div>
   </div>
 
+  <!-- Colors → Pair # -->
   <div id="panel-col" class="panel">
     <div class="card">
-      <div class="section-divider">Super binder — groups of 150 pairs (1 of 12)</div>
-      <div class="select-grid">
-        <div class="select-group"><label>Tip</label>
-          <select id="sbTipSel" onchange="lookupColor()">
-            <option value="0">White</option>
-            <option value="1">Red</option>
-            <option value="2">Black</option>
-          </select>
-        </div>
-        <div class="select-group"><label>Ring</label>
-          <select id="sbRingSel" onchange="lookupColor()">
-            <option value="0">Blue</option>
-            <option value="1">Orange</option>
-            <option value="2">Green</option>
-            <option value="3">Brown</option>
-            <option value="4">Slate</option>
-          </select>
-        </div>
+      <div class="section-divider">Super binder — solid color ribbon (600 pairs each)</div>
+      <div style="margin-bottom:10px">
+        <label>Color</label>
+        <select id="sbSel" onchange="lookupColor()">
+          <option value="0">White — pairs 1–600</option>
+          <option value="1">Red — pairs 601–1200</option>
+          <option value="2">Black — pairs 1201–1800</option>
+        </select>
       </div>
-      <div class="section-divider">Binder — groups of 25 pairs (1 of 6 in super binder)</div>
+
+      <div class="section-divider">Binder group — two-color ribbon (25 pairs each, 1–24 within super binder)</div>
       <div class="select-grid">
         <div class="select-group"><label>Tip</label>
           <select id="bTipSel" onchange="lookupColor()">
             <option value="0">White</option>
             <option value="1">Red</option>
+            <option value="2">Black</option>
+            <option value="3">Yellow</option>
+            <option value="4">Violet</option>
           </select>
         </div>
         <div class="select-group"><label>Ring</label>
@@ -264,11 +242,11 @@
             <option value="1">Orange</option>
             <option value="2">Green</option>
             <option value="3">Brown</option>
-            <option value="4">Slate</option>
           </select>
         </div>
       </div>
-      <div class="section-divider">Pair — within binder (1 of 25)</div>
+
+      <div class="section-divider">Pair — within binder (1–25)</div>
       <div class="select-grid">
         <div class="select-group"><label>Tip</label>
           <select id="pTipSel" onchange="lookupColor()">
@@ -293,6 +271,7 @@
     <div id="colorResult"></div>
   </div>
 
+  <!-- Reference -->
   <div id="panel-ref" class="panel">
     <div id="refContent"></div>
   </div>
@@ -302,6 +281,26 @@
 <div class="toast" id="toast"></div>
 
 <script>
+/*
+  CORRECT 25-PAIR COLOR CODE STRUCTURE (per industry standard / Superior Essex spec)
+  ─────────────────────────────────────────────────────────────────────────────────
+  PAIRS (1–25): Tip × Ring from two groups of 5
+    Tip:  White Red Black Yellow Violet
+    Ring: Blue Orange Green Brown Slate
+
+  BINDER GROUPS (25 pairs each, up to 24 per super binder):
+    Follow the same 25-pair color code — White/Blue (1) through Violet/Brown (24)
+    Note: Violet/Slate (25) is NOT used as a binder — stops at 24.
+
+  SUPER BINDERS (600 pairs = 24 binder groups each):
+    Use a SINGLE SOLID COLOR ribbon (not a pair):
+      White  → pairs    1–600   (binders  1–24)
+      Red    → pairs  601–1200  (binders 25–48)
+      Black  → pairs 1201–1800  (binders 49–72)
+      Yellow → pairs 1801–2400  (binders 73–96)   [2400-pair+]
+      Violet → pairs 2401–3000  (binders 97–120)  [3000-pair+]
+*/
+
 const TIPS = [
   {name:'White',  hex:'#EDECE4'},
   {name:'Red',    hex:'#C0392B'},
@@ -316,42 +315,77 @@ const RINGS = [
   {name:'Brown',  hex:'#7D4A1E'},
   {name:'Slate',  hex:'#7F8C8D'},
 ];
+// Super binders: single solid color, tip sequence only
+const SB_COLORS = [
+  {name:'White',  hex:'#EDECE4'},
+  {name:'Red',    hex:'#C0392B'},
+  {name:'Black',  hex:'#222222'},
+  {name:'Yellow', hex:'#F1C40F'},
+  {name:'Violet', hex:'#7F77DD'},
+];
 
+// Pair n (1-25) → tip/ring colors
 function pairColors(n) {
   const i = n - 1;
   return { tip: TIPS[Math.floor(i/5)], ring: RINGS[i%5] };
 }
 
-function fullLookup(n) {
-  const idx     = n - 1;
-  const pairInB = (idx % 25) + 1;
-  const bIdx    = Math.floor(idx / 25);
-  const sbIdx   = Math.floor(bIdx / 6);
-  const bInSb   = (bIdx % 6) + 1;
-  const bStart  = bIdx * 25 + 1;
-  const sbStart = sbIdx * 150 + 1;
+// Binder group n (1-24) → tip/ring colors (same as pair colors 1-24, ring stops at Brown)
+function binderColors(n) {
+  return pairColors(n); // 1-24 map exactly to pairs 1-24
+}
+
+// Full decomposition of pair 1-1800
+function fullLookup(overall) {
+  const idx      = overall - 1;           // 0-based
+  const pairInB  = (idx % 25) + 1;       // 1-25 within binder
+  const bIdx     = Math.floor(idx / 25); // 0-based binder index (0-71)
+  const sbIdx    = Math.floor(bIdx / 24);// 0-based super binder (0=White,1=Red,2=Black)
+  const bInSb    = (bIdx % 24) + 1;      // 1-24 within super binder
+  const bStart   = bIdx * 25 + 1;
+  const sbStart  = sbIdx * 600 + 1;
+
   return {
-    pair:        { ...pairColors(pairInB), num: pairInB, overall: n },
-    binder:      { ...pairColors(bInSb),  num: bIdx+1, withinSb: bInSb, start: bStart, end: bStart+24 },
-    superBinder: { ...pairColors(sbIdx+1),num: sbIdx+1, start: sbStart, end: sbStart+149 },
+    pair: { ...pairColors(pairInB), num: pairInB, overall },
+    binder: {
+      ...binderColors(bInSb),
+      num: bIdx + 1,        // overall binder number (1-72)
+      withinSb: bInSb,      // 1-24 within super binder
+      start: bStart,
+      end: bStart + 24,
+    },
+    superBinder: {
+      color: SB_COLORS[sbIdx],
+      num: sbIdx + 1,
+      start: sbStart,
+      end: Math.min(sbStart + 599, 1800),
+    },
   };
 }
 
-function levelCard(cls, tag, numDisplay, tip, ring, note) {
+function swatchEl(color) {
+  return `<div class="swatch" style="background:${color.hex}"></div>`;
+}
+
+function pairSwatchRow(tip, ring) {
+  return `<div class="swatch-row">
+    <div class="swatch-item">
+      ${swatchEl(tip)}
+      <div class="swatch-info"><div class="role">Tip</div><div class="color-name">${tip.name}</div></div>
+    </div>
+    <div class="slash">/</div>
+    <div class="swatch-item">
+      ${swatchEl(ring)}
+      <div class="swatch-info"><div class="role">Ring</div><div class="color-name">${ring.name}</div></div>
+    </div>
+  </div>`;
+}
+
+function levelCard(cls, tag, numDisplay, swatchContent, note) {
   return `<div class="level-card ${cls}">
     <div class="level-tag">${tag}</div>
     ${numDisplay !== '' ? `<div class="level-number">${numDisplay}</div>` : ''}
-    <div class="swatch-row">
-      <div class="swatch-item">
-        <div class="swatch" style="background:${tip.hex}"></div>
-        <div class="swatch-info"><div class="role">Tip</div><div class="color-name">${tip.name}</div></div>
-      </div>
-      <div class="slash">/</div>
-      <div class="swatch-item">
-        <div class="swatch" style="background:${ring.hex}"></div>
-        <div class="swatch-info"><div class="role">Ring</div><div class="color-name">${ring.name}</div></div>
-      </div>
-    </div>
+    ${swatchContent}
     ${note ? `<div class="pair-range">${note}</div>` : ''}
   </div>`;
 }
@@ -365,90 +399,111 @@ function lookupPair() {
     return;
   }
   const r = fullLookup(v);
+  const sbRow = `<div class="single-swatch-row">
+    <div class="swatch" style="background:${r.superBinder.color.hex}"></div>
+    <div class="swatch-info">
+      <div class="role">Solid ribbon color</div>
+      <div class="sb-label-text">${r.superBinder.color.name}</div>
+    </div>
+  </div>`;
+
   el.innerHTML = `<div class="result-stack">
     ${levelCard('superbinder',
-      `Super Binder ${r.superBinder.num} of 12`, '',
-      r.superBinder.tip, r.superBinder.ring,
+      `Super Binder ${r.superBinder.num} of 3 &nbsp;·&nbsp; Solid color ribbon`,
+      '', sbRow,
       `Covers pairs ${r.superBinder.start}–${r.superBinder.end}`)}
     ${levelCard('binder',
-      `Binder ${r.binder.num} of 72 &nbsp;·&nbsp; #${r.binder.withinSb} within super binder`, '',
-      r.binder.tip, r.binder.ring,
+      `Binder ${r.binder.num} of 72 &nbsp;·&nbsp; Group ${r.binder.withinSb} of 24 within super binder`,
+      '', pairSwatchRow(r.binder.tip, r.binder.ring),
       `Covers pairs ${r.binder.start}–${r.binder.end}`)}
     ${levelCard('pair',
-      `Pair ${r.pair.num} of 25 within binder &nbsp;·&nbsp; Overall pair`, v,
-      r.pair.tip, r.pair.ring, '')}
+      `Pair ${r.pair.num} of 25 within binder &nbsp;·&nbsp; Overall pair`,
+      v, pairSwatchRow(r.pair.tip, r.pair.ring), '')}
   </div>`;
 }
 
 function lookupColor() {
-  const sbTi = parseInt(document.getElementById('sbTipSel').value);
-  const sbRi = parseInt(document.getElementById('sbRingSel').value);
+  const sbI  = parseInt(document.getElementById('sbSel').value);
   const bTi  = parseInt(document.getElementById('bTipSel').value);
   const bRi  = parseInt(document.getElementById('bRingSel').value);
   const pTi  = parseInt(document.getElementById('pTipSel').value);
   const pRi  = parseInt(document.getElementById('pRingSel').value);
-  const sbNum = sbTi * 5 + sbRi + 1;
-  const bNum  = bTi  * 5 + bRi  + 1;
-  const pNum  = pTi  * 5 + pRi  + 1;
-  const el = document.getElementById('colorResult');
-  if (sbNum > 12) {
-    el.innerHTML = `<div class="card"><p class="error-msg">Invalid super binder — max is Black/Orange (#12)</p></div>`;
+  const el   = document.getElementById('colorResult');
+
+  // Binder within super binder: ring only goes to Brown (index 3), not Slate
+  // So valid combos: tips 0-4 × rings 0-3 = 20, but we only use 1-24
+  const bInSb = bTi * 4 + bRi + 1; // 1-20, valid up to 24
+  // Actually use full pair color logic but limit ring to 0-3:
+  const bNum  = bTi * 5 + bRi + 1; // position in full pair sequence (ring=Slate never used)
+  const pNum  = pTi * 5 + pRi + 1; // 1-25
+
+  if (bNum > 24) {
+    el.innerHTML = `<div class="card"><p class="error-msg">Invalid binder — max is Violet/Brown (group 24)</p></div>`;
     return;
   }
-  if (bNum > 6) {
-    el.innerHTML = `<div class="card"><p class="error-msg">Invalid binder — max within a super binder is Red/Blue (#6)</p></div>`;
-    return;
-  }
-  const overall = (sbNum-1)*150 + (bNum-1)*25 + pNum;
-  const bOverall = (sbNum-1)*6 + bNum;
-  const sbStart = (sbNum-1)*150+1;
-  const bStart  = (bOverall-1)*25+1;
-  const sbC = pairColors(sbNum);
-  const bC  = pairColors(bNum);
-  const pC  = pairColors(pNum);
+
+  const bOverall = sbI * 24 + bNum; // overall binder 1-72
+  const overall  = sbI * 600 + (bNum - 1) * 25 + pNum;
+  const bStart   = (bOverall - 1) * 25 + 1;
+  const sbStart  = sbI * 600 + 1;
+  const sbC      = SB_COLORS[sbI];
+  const bC       = binderColors(bNum);
+  const pC       = pairColors(pNum);
+
+  const sbRow = `<div class="single-swatch-row">
+    <div class="swatch" style="background:${sbC.hex}"></div>
+    <div class="swatch-info">
+      <div class="role">Solid ribbon color</div>
+      <div class="sb-label-text">${sbC.name}</div>
+    </div>
+  </div>`;
+
   el.innerHTML = `<div class="result-stack">
     ${levelCard('superbinder',
-      `Super Binder ${sbNum} of 12`, '',
-      sbC.tip, sbC.ring, `Covers pairs ${sbStart}–${sbStart+149}`)}
+      `Super Binder ${sbI+1} of 3 &nbsp;·&nbsp; Solid color ribbon`,
+      '', sbRow, `Covers pairs ${sbStart}–${Math.min(sbStart+599,1800)}`)}
     ${levelCard('binder',
-      `Binder ${bOverall} of 72 &nbsp;·&nbsp; #${bNum} within super binder`, '',
-      bC.tip, bC.ring, `Covers pairs ${bStart}–${bStart+24}`)}
+      `Binder ${bOverall} of 72 &nbsp;·&nbsp; Group ${bNum} of 24 within super binder`,
+      '', pairSwatchRow(bC.tip, bC.ring), `Covers pairs ${bStart}–${bStart+24}`)}
     ${levelCard('pair',
-      `Pair ${pNum} of 25 within binder &nbsp;·&nbsp; Overall pair`, overall,
-      pC.tip, pC.ring, '')}
+      `Pair ${pNum} of 25 within binder &nbsp;·&nbsp; Overall pair`,
+      overall, pairSwatchRow(pC.tip, pC.ring), '')}
   </div>`;
 }
 
 function buildRef() {
   const el = document.getElementById('refContent');
   let h = '';
-  for (let sb = 1; sb <= 12; sb++) {
-    const sbC = pairColors(sb);
-    const sbStart = (sb-1)*150+1;
+  for (let sb = 0; sb < 3; sb++) {
+    const sbc = SB_COLORS[sb];
+    const sbStart = sb * 600 + 1;
+    const sbEnd = Math.min(sbStart + 599, 1800);
     h += `<div class="sb-section">
       <div class="sb-header">
-        <div class="sb-dot" style="background:${sbC.tip.hex}"></div>
-        <div class="sb-dot" style="background:${sbC.ring.hex}"></div>
-        SB ${sb}: ${sbC.tip.name}/${sbC.ring.name} &nbsp;(pairs ${sbStart}–${sbStart+149})
+        <div class="sb-swatch" style="background:${sbc.hex}"></div>
+        <span class="sb-title">Super Binder ${sb+1}: ${sbc.name} ribbon</span>
+        <span class="sb-range">pairs ${sbStart}–${sbEnd}</span>
       </div>`;
-    for (let b = 1; b <= 6; b++) {
-      const bC = pairColors(b);
-      const bOverall = (sb-1)*6+b;
-      const bStart = (bOverall-1)*25+1;
+    const numBinders = sb < 2 ? 24 : Math.ceil((sbEnd - sbStart + 1) / 25);
+    for (let b = 1; b <= numBinders; b++) {
+      const bc = binderColors(b);
+      const bOverall = sb * 24 + b;
+      const bStart = (bOverall - 1) * 25 + 1;
+      const bEnd = bStart + 24;
       h += `<div class="binder-row">
         <div class="binder-head" onclick="toggleBinder(this)">
           <span class="binder-num">${bOverall}</span>
           <div class="binder-dots">
-            <div class="binder-dot" style="background:${bC.tip.hex}"></div>
-            <div class="binder-dot" style="background:${bC.ring.hex}"></div>
+            <div class="binder-dot" style="background:${bc.tip.hex}" title="${bc.tip.name}"></div>
+            <div class="binder-dot" style="background:${bc.ring.hex}" title="${bc.ring.name}"></div>
           </div>
-          <span class="binder-name">${bC.tip.name}/${bC.ring.name}</span>
-          <span class="binder-range">${bStart}–${bStart+24}</span>
+          <span class="binder-name">${bc.tip.name}/${bc.ring.name}</span>
+          <span class="binder-range">${bStart}–${bEnd}</span>
         </div>
         <div class="pairs-grid">`;
       for (let p = 1; p <= 25; p++) {
         const pc = pairColors(p);
-        const overall = bStart+p-1;
+        const overall = bStart + p - 1;
         h += `<div class="pair-chip" onclick="goToPair(${overall})">
           <span class="chip-num">${overall}</span>
           <div class="chip-dots">
@@ -465,9 +520,7 @@ function buildRef() {
   el.innerHTML = h;
 }
 
-function toggleBinder(head) {
-  head.nextElementSibling.classList.toggle('open');
-}
+function toggleBinder(head) { head.nextElementSibling.classList.toggle('open'); }
 
 function goToPair(n) {
   switchTab('num');
